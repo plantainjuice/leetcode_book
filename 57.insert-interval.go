@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=57 lang=golang
+ *
+ * [57] Insert Interval
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func min(a, b int) int {
 	if a < b {
 		return a
@@ -47,7 +48,5 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 	return result
 }
 
-func main() {
-	res := insert([][]int{{1, 3}, {6, 9}}, []int{2, 5})
-	fmt.Println(res)
-}
+// @lc code=end
+
