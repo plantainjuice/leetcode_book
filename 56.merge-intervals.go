@@ -1,8 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=56 lang=golang
+ *
+ * [56] Merge Intervals
+ */
 
-import (
-	"fmt"
-)
+// @lc code=start
 
 func merge(intervals [][]int) [][]int {
 	if len(intervals) == 0 || len(intervals) == 1 {
@@ -10,7 +12,6 @@ func merge(intervals [][]int) [][]int {
 	}
 
 	quickSort(intervals, 0, len(intervals)-1)
-	fmt.Println(intervals)
 	res, curIndex := make([][]int, 0), 0
 	res = append(res, intervals[0])
 
@@ -58,9 +59,5 @@ func quickSort(nums [][]int, lo, hi int) {
 	quickSort(nums, lo, p-1)
 	quickSort(nums, p+1, hi)
 }
+// @lc code=end
 
-func main() {
-	res := merge([][]int{{1, 3}, {2, 6}, {8, 10}, {15, 18}})
-	// res := merge([][]int{{1, 4}, {2, 3}})
-	fmt.Println(res)
-}
