@@ -5,24 +5,26 @@
  */
 
 // @lc code=start
+
+// prefix sum
 type NumArray struct {
-	nums []int
+	prefixSum []int
 }
 
 
 func Constructor(nums []int) NumArray {
-	return NumArray{nums: nums}
+	for i := 1; i < len(nums); i++ {
+		nums[i] += nums[i-1]
+	}
+	return NumArray{prefixSum: nums}
 }
 
 
 func (this *NumArray) SumRange(i int, j int) int {
-	sum := 0
-	for i <= j && i < len(this.nums){
-		sum += this.nums[i]
-		i++
+	if i > 0{
+		return this.prefixSum[j] - this.prefixSum[i-1]
 	}
-
-	return sum
+	return this.prefixSum[j]
 }
 
 /**
