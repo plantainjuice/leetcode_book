@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=242 lang=golang
+ *
+ * [242] Valid Anagram
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func isAnagram(s string, t string) bool {
 	alphabet := make([]int, 26)
 	sBytes := []byte(s)
@@ -29,8 +30,5 @@ func isAnagram(s string, t string) bool {
 
 	return true
 }
+// @lc code=end
 
-func main() {
-	res := isAnagram("anagram", "nagaram")
-	fmt.Println(res)
-}
