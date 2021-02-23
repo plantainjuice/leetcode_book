@@ -1,16 +1,18 @@
-package main
+/*
+ * @lc app=leetcode id=98 lang=golang
+ *
+ * [98] Validate Binary Search Tree
+ */
 
-import (
-	"fmt"
-	"math"
-)
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 func isValidBST(root *TreeNode) bool {
 	return isValidbst(root, math.MinInt32, math.MaxInt32)
 }
@@ -25,7 +27,5 @@ func isValidbst(root *TreeNode, min, max int) bool {
 	return v <= max && v >= min && isValidbst(root.Left, min, v) && isValidbst(root.Right, v, max)
 }
 
-func main() {
-	res := isValidBST(&TreeNode{1, nil, nil})
-	fmt.Println(res)
-}
+// @lc code=end
+
