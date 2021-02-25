@@ -13,19 +13,18 @@
  *     Right *TreeNode
  * }
  */
-func isValidBST(root *TreeNode) bool {
-	return isValidbst(root, math.MinInt32, math.MaxInt32)
+ func isValidBST(root *TreeNode) bool {
+	return isValidbst(root, math.MinInt64, math.MaxInt64)
 }
 
-func isValidbst(root *TreeNode, min, max int) bool {
+func isValidbst(root *TreeNode, min, max int64) bool {
 	if root == nil {
 		return true
 	}
 
-	v := root.Val
+	v := int64(root.Val)
 
-	return v <= max && v >= min && isValidbst(root.Left, min, v) && isValidbst(root.Right, v, max)
+	return v < max && v > min && isValidbst(root.Left, min, v) && isValidbst(root.Right, v, max)
 }
-
 // @lc code=end
 

@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=200 lang=golang
+ *
+ * [200] Number of Islands
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 var directions = [4][2]int{
 	{-1, 0},
 	{0, 1},
@@ -55,21 +56,7 @@ func searchIsland(grid [][]byte, visited [][]bool, x, y int) {
 			searchIsland(grid, visited, nx, ny)
 		}
 	}
-
 }
 
-func main() {
-	// res := numIslands([][]byte{
-	// 	{'1', '1', '1', '1', '0'},
-	// 	{'1', '1', '0', '1', '0'},
-	// 	{'1', '1', '0', '0', '0'},
-	// 	{'0', '0', '0', '0', '0'},
-	// })
-	res := numIslands([][]byte{
-		{'1', '1', '0', '0', '0'},
-		{'1', '1', '0', '0', '0'},
-		{'0', '0', '1', '0', '0'},
-		{'0', '0', '0', '1', '1'},
-	})
-	fmt.Println(res)
-}
+// @lc code=end
+
