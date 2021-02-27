@@ -1,10 +1,11 @@
-package main
+/*
+ * @lc app=leetcode id=207 lang=golang
+ *
+ * [207] Course Schedule
+ */
 
-import (
-	"fmt"
-)
-
-func findOrder(numCourses int, prerequisites [][]int) []int {
+// @lc code=start
+func canFinish(numCourses int, prerequisites [][]int) bool {
 	in := make([]int, numCourses)
 	frees := make([][]int, numCourses)
 	next := make([]int, 0, numCourses)
@@ -31,14 +32,7 @@ func findOrder(numCourses int, prerequisites [][]int) []int {
 		}
 	}
 
-	if len(next) == numCourses {
-		return next
-	}
-
-	return []int{}
+	return len(next) == numCourses
 }
+// @lc code=end
 
-func main() {
-	res := findOrder(4, [][]int{{1, 0}, {2, 0}, {3, 1}, {3, 2}})
-	fmt.Println(res)
-}
