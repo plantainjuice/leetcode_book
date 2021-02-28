@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=3 lang=golang
+ *
+ * [3] Longest Substring Without Repeating Characters
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func lengthOfLongestSubstring(s string) int {
 	if len(s) == 0 {
 		return 0
@@ -30,7 +31,4 @@ func max(a, b int)int{
 	return a
 }
 
-func main() {
-	res := lengthOfLongestSubstring("abcabcbb")
-	fmt.Println(res)
-}
+// @lc code=end
