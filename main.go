@@ -4,33 +4,17 @@ import (
 	"fmt"
 )
 
-func lengthOfLongestSubstring(s string) int {
-	if len(s) == 0 {
-		return 0
+func titleToNumber(s string) int {
+	res := 0
+	for _, c := range s {
+		res *= 26
+		res += (int(c - 'A') + 1)
 	}
-	result, left, right, freq := 0, 0, 0, make([]int, 256)
-
-	for left < len(s) {
-		if right < len(s) && freq[s[right]-'a'] == 0 {
-			freq[s[right]-'a']++
-			right++
-		} else {
-			freq[s[left]-'a']--
-			left++
-		}
-		result = max(result, right-left)
-	}
-	return result
-}
-
-func max(a, b int)int{
-	if a < b {
-		return b
-	}
-	return a
+    
+	return res
 }
 
 func main() {
-	res := lengthOfLongestSubstring("abcabcbb")
+	res := titleToNumber("ZY")
 	fmt.Println(res)
 }
