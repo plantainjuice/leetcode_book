@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=223 lang=golang
+ *
+ * [223] Rectangle Area
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func computeArea(A int, B int, C int, D int, E int, F int, G int, H int) int {
 	x0, y0, x1, y1 := max(A, E), max(B, F), min(C, G), min(D, H)
 	return area(A, B, C, D) + area(E, F, G, H) - area(x0, y0, x1, y1)
@@ -32,8 +33,5 @@ func area(X0, Y0, X1, Y1 int) int {
 
 	return h * w
 }
+// @lc code=end
 
-func main() {
-	res := computeArea(-3, 0, 3, 4, 0, -1, 9, 2)
-	fmt.Println(res)
-}
