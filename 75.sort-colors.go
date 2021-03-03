@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=75 lang=golang
+ *
+ * [75] Sort Colors
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func sortColors(nums []int) {
 	if len(nums) == 0 {
 		return
@@ -30,8 +31,4 @@ func sortColors(nums []int) {
 	}
 }
 
-func main() {
-	res := []int{2, 0, 2, 1, 1, 0}
-	sortColors(res)
-	fmt.Println(res)
-}
+// @lc code=end
