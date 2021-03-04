@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=31 lang=golang
+ *
+ * [31] Next Permutation
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func nextPermutation(nums []int) {
 	i, j := 0, 0
 	for i = len(nums) - 2; i >= 0; i-- {
@@ -36,9 +37,5 @@ func swap(nums []int, i, j int) {
 	nums[i], nums[j] = nums[j], nums[i]
 }
 
-func main() {
-	res := []int{1, 3, 2}
-	// res := []int{1, 2, 3}
-	nextPermutation(res)
-	fmt.Println(res)
-}
+// @lc code=end
+
