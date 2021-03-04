@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=202 lang=golang
+ *
+ * [202] Happy Number
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func isHappy(n int) bool {
 	res, num, record := 0, n, map[int]int{}
 
@@ -26,8 +27,5 @@ func isHappy(n int) bool {
 	}
     
 }
+// @lc code=end
 
-func main() {
-	res := isHappy(0)
-	fmt.Println(res)
-}
