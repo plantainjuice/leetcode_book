@@ -1,27 +1,11 @@
-package main
+/*
+ * @lc app=leetcode id=198 lang=golang
+ *
+ * [198] House Robber
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func rob(nums []int) int {
-	length := len(nums)
-	if length == 0 {
-		return 0
-	}
-
-	if length == 1 {
-		return nums[0]
-	}
-
-	if length == 2 {
-		return max(nums[0], nums[1])
-	}
-
-	return max(_rob(nums[0:length-1]), _rob(nums[1:length]))
-}
-
-func _rob(nums []int) int {
 	length := len(nums)
 	if length == 0 {
 		return 0
@@ -52,8 +36,5 @@ func max(a, b int) int {
 	return a
 }
 
-func main() {
-	// res := rob([]int{1, 2, 3, 1})
-	res := rob([]int{1, 2, 3, 1})
-	fmt.Println(res)
-}
+// @lc code=end
+
