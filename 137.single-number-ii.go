@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=137 lang=golang
+ *
+ * [137] Single Number II
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func singleNumber(nums []int) int {
 	ones, twos := 0, 0
 	for _, n := range nums {
@@ -13,9 +14,5 @@ func singleNumber(nums []int) int {
 
 	return ones
 }
+// @lc code=end
 
-func main() {
-	// res := rob([]int{1, 2, 3, 1})
-	res := singleNumber([]int{2, 2, 3, 2})
-	fmt.Println(res)
-}
