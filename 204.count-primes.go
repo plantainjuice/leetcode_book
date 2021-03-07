@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=204 lang=golang
+ *
+ * [204] Count Primes
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func countPrimes(n int) int {
 	res, isNotPrime := 0, make([]bool, n)
 
@@ -26,8 +27,4 @@ func countPrimes(n int) int {
 	return res
 }
 
-func main() {
-	// res := rob([]int{1, 2, 3, 1})
-	res := countPrimes(10)
-	fmt.Println(res)
-}
+// @lc code=end
