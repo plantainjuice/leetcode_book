@@ -1,15 +1,18 @@
-package main
+/*
+ * @lc app=leetcode id=337 lang=golang
+ *
+ * [337] House Robber III
+ */
 
-import (
-	"fmt"
-)
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 func rob(root *TreeNode) int {
 	v1, v2 := dfsRobTree(root)
 
@@ -38,9 +41,5 @@ func max(a, b int) int {
 	return a
 }
 
-func main() {
-	// res := rob([]int{1, 2, 3, 1})
-	root := TreeNode{Val: 3, Left: &TreeNode{Val: 2, Right: &TreeNode{Val: 3}}, Right: &TreeNode{Val: 3, Right: &TreeNode{Val: 1}}}
-	res := rob(&root)
-	fmt.Println(res)
-}
+// @lc code=end
+
