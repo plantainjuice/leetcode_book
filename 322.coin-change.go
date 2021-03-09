@@ -1,9 +1,10 @@
-package main
+/*
+ * @lc app=leetcode id=322 lang=golang
+ *
+ * [322] Coin Change
+ */
 
-import (
-	"fmt"
-)
-
+// @lc code=start
 func coinChange(coins []int, amount int) int {
 	dp := make([]int, amount+1)
 	dp[0] = 0
@@ -34,8 +35,5 @@ func min(a, b int) int {
 
 	return b
 }
+// @lc code=end
 
-func main() {
-	res := coinChange([]int{1, 2, 5}, 11)
-	fmt.Println(res)
-}
