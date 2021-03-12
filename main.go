@@ -4,38 +4,49 @@ import (
 	"fmt"
 )
 
-func coinChange(coins []int, amount int) int {
-	dp := make([]int, amount+1)
-	dp[0] = 0
-
-	for i := 1; i <= amount; i++ {
-		dp[i] = amount + 1
-	}
-
-	for i := 1; i <= amount; i++ {
-		for _, coin := range coins {
-			if coin <= i {
-				dp[i] = min(dp[i], dp[i-coin]+1)
-			}
-		}
-
-	}
-	if dp[amount] > amount {
-		return -1
-	}
-
-	return dp[amount]
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
+func detectCycle(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
 	}
 
-	return b
+	quick := head
+	slow := head
+	hasCycle := false
+
+	for quick.Next != nil && quick.Next.Next != nil {
+		quick = quick.Next.Next
+		slow = slow.Next
+
+		if quick == slow {
+			hasCycle = true
+			break
+		}
+	}
+
+	if hasCycle == false{
+		return nil
+	}
+
+	find := head
+
+	for find != slow{
+		find = find.Next
+		slow = slow.Next
+	}
+
+	return slow
 }
 
 func main() {
-	res := coinChange([]int{1, 2, 5}, 11)
+	head := &ListNode{1, nil}
+	tmp := &ListNode{2, head}
+	head.Next = tmp
+
+	res := detectCycle(head)
 	fmt.Println(res)
 }
