@@ -4,49 +4,25 @@ import (
 	"fmt"
 )
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+func majorityElement(nums []int) int {
+	res, count := nums[0], 0
 
-func detectCycle(head *ListNode) *ListNode {
-	if head == nil {
-		return nil
-	}
-
-	quick := head
-	slow := head
-	hasCycle := false
-
-	for quick.Next != nil && quick.Next.Next != nil {
-		quick = quick.Next.Next
-		slow = slow.Next
-
-		if quick == slow {
-			hasCycle = true
-			break
+	for _, num := range nums {
+		if count == 0 {
+			res, count = num, 1
+		} else {
+			if num == res {
+				count++
+			} else {
+				count--
+			}
 		}
 	}
 
-	if hasCycle == false{
-		return nil
-	}
-
-	find := head
-
-	for find != slow{
-		find = find.Next
-		slow = slow.Next
-	}
-
-	return slow
+	return res
 }
 
 func main() {
-	head := &ListNode{1, nil}
-	tmp := &ListNode{2, head}
-	head.Next = tmp
-
-	res := detectCycle(head)
+	res := majorityElement([]int{3, 2, 3})
 	fmt.Println(res)
 }
