@@ -4,37 +4,65 @@ import (
 	"fmt"
 )
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+type WordDictionary struct {
+	isWord bool
+	children map[rune]*WordDictionary
 }
 
-func buildTree(preorder []int, inorder []int) *TreeNode {
-	inPos := make(map[int]int)
-	for i := 0; i < len(inorder); i++ {
-		inPos[inorder[i]] = i
-	}
 
-	return buildTreeDFS(preorder, 0, len(preorder)-1, 0, inPos)
+/** Initialize your data structure here. */
+func Constructor() WordDictionary {
+	return WordDictionary{isWord: false, children: make(map[rune]*WordDictionary)}
 }
 
-func buildTreeDFS(pre []int, preStart int, preEnd int, inStart int, inPos map[int]int) *TreeNode {
-	if preStart > preEnd {
-		return nil
+
+func (this *WordDictionary) AddWord(word string)  {
+	parent := this
+
+	for _, ch := range word{
+		if child, ok := parent.children[ch]; ok{
+			parent = child
+		}else{
+			newChild := &WordDictionary{isWord: false, children: make(map[rune]*WordDictionary)}
+			parent.children[ch] = newChild
+			parent = newChild
+		}
+	}
+    
+	parent.isWord = true
+}
+
+
+func (this *WordDictionary) Search(word string) bool {
+	parent := this
+
+	for i, ch := range word{
+		if ch == '.'{
+			for _, child := range parent.children {
+				if child.Search(word[i+1:]){
+					return true
+				}
+			}
+		}
+		
+		if child, ok := parent.children[ch]; ok{
+			parent = child
+			continue
+		}
+
+		return false
 	}
 
-	root := &TreeNode{Val: pre[preStart]}
-	rootIdx := inPos[pre[preStart]]
-	leftLen := rootIdx - inStart
-
-	root.Left = buildTreeDFS(pre, preStart+1, preStart+leftLen, inStart, inPos)
-	root.Right = buildTreeDFS(pre, preStart+leftLen+1, preEnd, rootIdx+1, inPos)
-
-	return root
+	return parent.isWord
 }
 
 func main() {
-	res := buildTree([]int{3, 9, 20, 15, 7}, []int{9, 3, 15, 20, 7})
-	fmt.Println(res)
+	word := "apple"
+	prefix := "app.."
+
+	obj := Constructor();
+	obj.AddWord(word);
+	param_2 := obj.Search(prefix);
+
+	fmt.Println(obj, param_2)
 }
