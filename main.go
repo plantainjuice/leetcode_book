@@ -4,65 +4,48 @@ import (
 	"fmt"
 )
 
-type WordDictionary struct {
-	isWord bool
-	children map[rune]*WordDictionary
-}
-
-
-/** Initialize your data structure here. */
-func Constructor() WordDictionary {
-	return WordDictionary{isWord: false, children: make(map[rune]*WordDictionary)}
-}
-
-
-func (this *WordDictionary) AddWord(word string)  {
-	parent := this
-
-	for _, ch := range word{
-		if child, ok := parent.children[ch]; ok{
-			parent = child
-		}else{
-			newChild := &WordDictionary{isWord: false, children: make(map[rune]*WordDictionary)}
-			parent.children[ch] = newChild
-			parent = newChild
-		}
+func minSubArrayLen(target int, nums []int) int {
+	if len(nums) == 0 {
+		return 0
 	}
-    
-	parent.isWord = true
-}
 
+	res, sum, i, j := len(nums)+1, nums[0], 0, 0
 
-func (this *WordDictionary) Search(word string) bool {
-	parent := this
+	for j < len(nums) {
+		fmt.Println(i, j, sum)
+		if sum < target && j < len(nums) {
+			j++
 
-	for i, ch := range word{
-		if ch == '.'{
-			for _, child := range parent.children {
-				if child.Search(word[i+1:]){
-					return true
-				}
+			if j == len(nums){
+				continue
 			}
-		}
-		
-		if child, ok := parent.children[ch]; ok{
-			parent = child
-			continue
-		}
 
-		return false
+			sum += nums[j]
+		} 
+
+		if sum >= target {
+			sum -= nums[i]
+			res = min(res, j-i+1)
+			i++
+		}
 	}
 
-	return parent.isWord
+	if res == len(nums)+1 {
+		return 0
+	}
+
+	return res
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 
 func main() {
-	word := "apple"
-	prefix := "app.."
+	res := minSubArrayLen(7, []int{2, 3, 1, 2, 4, 3})
 
-	obj := Constructor();
-	obj.AddWord(word);
-	param_2 := obj.Search(prefix);
-
-	fmt.Println(obj, param_2)
+	fmt.Println(res)
 }
