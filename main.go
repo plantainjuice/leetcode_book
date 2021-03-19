@@ -4,48 +4,30 @@ import (
 	"fmt"
 )
 
-func minSubArrayLen(target int, nums []int) int {
-	if len(nums) == 0 {
-		return 0
-	}
+func hIndex(citations []int) int {
+	n, cite_count := len(citations), make([]int, len(citations)+1)
 
-	res, sum, i, j := len(nums)+1, nums[0], 0, 0
-
-	for j < len(nums) {
-		fmt.Println(i, j, sum)
-		if sum < target && j < len(nums) {
-			j++
-
-			if j == len(nums){
-				continue
-			}
-
-			sum += nums[j]
-		} 
-
-		if sum >= target {
-			sum -= nums[i]
-			res = min(res, j-i+1)
-			i++
+	for _, c := range citations {
+		if c >= n {
+			cite_count[n]++
+		} else {
+			cite_count[c]++
 		}
 	}
 
-	if res == len(nums)+1 {
-		return 0
+	count := 0
+	for i := n; i >= 0; i-- {
+		count += cite_count[i]
+		if count >= i {
+			return i
+		}
 	}
 
-	return res
-}
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
+	return 0
 }
 
 func main() {
-	res := minSubArrayLen(7, []int{2, 3, 1, 2, 4, 3})
+	res := hIndex([]int{1, 3, 1})
 
 	fmt.Println(res)
 }
