@@ -4,23 +4,31 @@ import (
 	"fmt"
 )
 
-func hIndex(citations []int) int {
-	low, high := 0, len(citations) - 1
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
-	for low <= high {
-		mid := low + (high-low)>>1
-		if len(citations)-mid > citations[mid] {
-			low = mid + 1
-		} else {
-			high = mid - 1
-		}
+func invertTree(root *TreeNode) *TreeNode {
+	if root == nil {
+		return root
 	}
 
-	return len(citations) - low
+    left := root.Left
+    right := root.Right
+
+	root.Left = invertTree(right)
+	root.Right = invertTree(left)
+
+	return root
 }
 
 func main() {
-	res := hIndex([]int{0, 1, 3, 5, 6})
+	root := &TreeNode{4,
+		&TreeNode{2, &TreeNode{1, nil, nil}, &TreeNode{3, nil, nil}},
+		&TreeNode{7, &TreeNode{6, nil, nil}, &TreeNode{9, nil, nil}}}
 
-	fmt.Println(res)
+	res := invertTree(root)
+	fmt.Println(res.Val, res.Left, res.Right, res.Left.Left)
 }
