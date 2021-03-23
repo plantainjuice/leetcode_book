@@ -1,52 +1,46 @@
 package main
 
 import (
-	"fmt"
+    "fmt"
 )
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+var dict = map[string][]string{
+    "2" : []string{"a","b","c"},
+    "3" : []string{"d", "e", "f"},
+    "4" : []string{"g", "h", "i"},
+    "5" : []string{"j", "k", "l"},
+    "6" : []string{"m", "n", "o"},
+    "7" : []string{"p", "q", "r", "s"},
+    "8" : []string{"t", "u", "v"},
+    "9" : []string{"w", "x", "y", "z"},
 }
 
-func findTilt(root *TreeNode) int {
-	if root == nil {
-		return 0
-	}
+func letterCombinations(digits string) []string {
+    res := []string{}
 
-    sum := 0
-    findTiltDFS(root, &sum)
-
-    return sum
-}
-
-func findTiltDFS(root *TreeNode, sum *int)int{
-    if root == nil {
-        return 0
+    if digits != ""{
+        letterCombinationsDFS(digits, "", &res)
     }
 
-	left := findTiltDFS(root.Left, sum)
-	right := findTiltDFS(root.Right, sum)
-	*sum += int(abs(float64(left) - float64(right)))
-
-	return root.Val + left + right
+    return res
 }
 
+func letterCombinationsDFS(digits string, combine string, result *[]string){
+    if digits == ""{
+        *result = append(*result, combine)
+        return
+    }
 
-func abs(n float64) float64 {
-	if n < 0 {
-		return -n
-	}
-
-	return n
+    num := digits[0:1]
+    digits = digits[1:]
+    for _, c := range dict[num] {
+        combine += c
+        letterCombinationsDFS(digits, combine, result)
+        combine = combine[0: len(combine) - 1]
+    }
 }
 
 func main() {
-	root := &TreeNode{1,
-		&TreeNode{2, nil, nil},
-		&TreeNode{3, nil, nil}}
-
-	res := findTilt(root)
-	fmt.Println(res)
+    res := letterCombinations("23")
+    fmt.Println(res)
 }
