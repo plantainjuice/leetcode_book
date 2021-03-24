@@ -1,46 +1,27 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
+	"strings"
 )
 
-var dict = map[string][]string{
-    "2" : []string{"a","b","c"},
-    "3" : []string{"d", "e", "f"},
-    "4" : []string{"g", "h", "i"},
-    "5" : []string{"j", "k", "l"},
-    "6" : []string{"m", "n", "o"},
-    "7" : []string{"p", "q", "r", "s"},
-    "8" : []string{"t", "u", "v"},
-    "9" : []string{"w", "x", "y", "z"},
-}
+func simplifyPath(path string) string {
+	stack, arr := []string{}, strings.Split(path, "/")
 
-func letterCombinations(digits string) []string {
-    res := []string{}
+	for _, dir := range arr {
+		if dir == ".." {
+			if len(stack) > 0 {
+				stack = stack[0 : len(stack)-1]
+			}
+		} else if dir != "." && len(dir) > 0 {
+			stack = append(stack, dir)
+		}
+	}
 
-    if digits != ""{
-        letterCombinationsDFS(digits, "", &res)
-    }
-
-    return res
-}
-
-func letterCombinationsDFS(digits string, combine string, result *[]string){
-    if digits == ""{
-        *result = append(*result, combine)
-        return
-    }
-
-    num := digits[0:1]
-    digits = digits[1:]
-    for _, c := range dict[num] {
-        combine += c
-        letterCombinationsDFS(digits, combine, result)
-        combine = combine[0: len(combine) - 1]
-    }
+	return "/" + strings.Join(stack, "/")
 }
 
 func main() {
-    res := letterCombinations("23")
-    fmt.Println(res)
+	res := simplifyPath("/a/../../b/../c//.//")
+	fmt.Println(res)
 }
