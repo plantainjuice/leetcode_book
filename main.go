@@ -2,26 +2,39 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-func simplifyPath(path string) string {
-	stack, arr := []string{}, strings.Split(path, "/")
+func trap(height []int) int {
+	res, left, right, leftmax, rightmax := 0, 0, len(height)-1, 0, 0
 
-	for _, dir := range arr {
-		if dir == ".." {
-			if len(stack) > 0 {
-				stack = stack[0 : len(stack)-1]
+    if len(height) <= 2{
+        return 0
+    }
+
+	for left < right {
+		if height[left] <= height[right] {
+			if height[left] > leftmax {
+				leftmax = height[left]
+			} else {
+				res += leftmax - height[left]
 			}
-		} else if dir != "." && len(dir) > 0 {
-			stack = append(stack, dir)
+
+            left++
+		} else {
+			if height[right] > rightmax {
+				rightmax = height[right]
+			} else {
+				res += rightmax - height[right]
+			}
+
+            right--
 		}
 	}
 
-	return "/" + strings.Join(stack, "/")
+    return res
 }
 
 func main() {
-	res := simplifyPath("/a/../../b/../c//.//")
+	res := trap([]int{1, 2})
 	fmt.Println(res)
 }
