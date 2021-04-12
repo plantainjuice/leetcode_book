@@ -4,37 +4,45 @@ import (
 	"fmt"
 )
 
-func trap(height []int) int {
-	res, left, right, leftmax, rightmax := 0, 0, len(height)-1, 0, 0
+func largestRectangleArea(heights []int) int {
+	maxArea, stack, height := 0, []int{}, 0
 
-    if len(height) <= 2{
-        return 0
-    }
-
-	for left < right {
-		if height[left] <= height[right] {
-			if height[left] > leftmax {
-				leftmax = height[left]
-			} else {
-				res += leftmax - height[left]
-			}
-
-            left++
+	for i := 0; i <= len(heights); i++ {
+		if i == len(heights) {
+			height = 0
 		} else {
-			if height[right] > rightmax {
-				rightmax = height[right]
+			height = heights[i]
+		}
+
+		if len(stack) == 0 || height >= heights[stack[len(stack)-1]] {
+			stack = append(stack, i)
+		} else {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+
+			length := 0
+			if len(stack) == 0 {
+				length = i
 			} else {
-				res += rightmax - height[right]
+				length = i - 1 - stack[len(stack)-1]
 			}
 
-            right--
+			maxArea = max(maxArea, length*heights[top])
+			i--
 		}
 	}
 
-    return res
+	return maxArea
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 func main() {
-	res := trap([]int{1, 2})
+	res := largestRectangleArea([]int{2, 1, 5, 6, 2, 3})
 	fmt.Println(res)
 }
