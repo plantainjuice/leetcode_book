@@ -27,10 +27,6 @@ impl Solution {
 
                 if i == 0 || j == 0 {
                     // do nothing
-                }else if i == 0{
-                    sizes[i][j] = sizes[i][j-1] + 1;
-                }else if j == 0{
-                    sizes[i][j] = sizes[i-1][j] + 1;
                 }else{
                     use std::cmp::min;
                     sizes[i][j] = min(min(sizes[i][j-1], sizes[i-1][j]), sizes[i-1][j-1]) + 1;
