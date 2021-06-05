@@ -1,4 +1,4 @@
-j/*
+/*
  * @lc app=leetcode id=126 lang=rust
  *
  * [126] Word Ladder II
