@@ -26,10 +26,10 @@ class Solution {
       if (slow == fast) break;
     }
 
-    fast = 0;
-    while (fast != slow) {
+    int slow2 = 0;
+    while (slow2 != slow) {
       slow = nums[slow];
-      fast = nums[fast];
+      slow2 = nums[slow2];
     }
 
     return slow;
