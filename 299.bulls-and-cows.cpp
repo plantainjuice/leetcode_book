@@ -24,21 +24,16 @@ class Solution {
       }
 
       ++cnt[s - '0'];
+
+      ++B;
+      --cnt[g - '0'];
     }
 
-    for (int i = 0; i < secret.size(); ++i) {
-      const char s = secret[i];
-      const char g = guess[i];
-
-      if(s == g) continue;
-
-      if (cnt[g - '0']) {
-        ++B;
-		--cnt[g - '0'];
-      }
+    for (int i = 0; i < 10; ++i) {
+      if (cnt[i] < 0) B += cnt[i];
     }
 
-	return to_string(A) + "A" + to_string(B) + "B";
+    return to_string(A) + "A" + to_string(B) + "B";
   }
 };
 // @lc code=end
