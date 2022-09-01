@@ -32,7 +32,10 @@ class Solution {
     if (pos == s.size()) {
       if (opened_left_bracket == 0 && excess_left == 0 && excess_right == 0)
         solutions.insert(solution);
-    } else if (s[pos] == '(') {
+      return;
+    }
+
+    if(s[pos] == '(') {
       if (excess_left > 0)
         dfs(s, pos + 1, opened_left_bracket, excess_left - 1, excess_right, solution, solutions);
 
