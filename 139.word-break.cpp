@@ -23,6 +23,7 @@ class Solution {
         if (dp[j] == false) continue;
 
         dp[i] = true;
+        break;
       }
     }
 
