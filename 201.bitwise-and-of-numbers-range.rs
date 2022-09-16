@@ -4,7 +4,7 @@
  * [201] Bitwise AND of Numbers Range
  */
 
-q// @lc code=start
+// @lc code=start
 impl Solution {
     pub fn range_bitwise_and(left: i32, right: i32) -> i32 {
         let mut cnt = 0;

@@ -1,0 +1,22 @@
+/*
+ * @lc app=leetcode id=201 lang=cpp
+ *
+ * [201] Bitwise AND of Numbers Range
+ */
+
+// @lc code=start
+class Solution {
+public:
+    int rangeBitwiseAnd(int left, int right) {
+      int cnt = 0;
+      while(left != right) {
+        left = left >> 1;
+        right = right >> 1;
+        cnt++;
+      }
+
+      return left << cnt;
+    }
+};
+// @lc code=end
+
