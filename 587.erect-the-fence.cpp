@@ -44,11 +44,11 @@ public:
         // 2. find convex points
         int n = T.size();
         vector<vector<int>> convex;
-        convex.push_back(T[n-1]);
-        convex.push_back(T[n-2]);
-        for(int i = n - 3; i >= 0; --i) {
+        convex.push_back(T[0]);
+        convex.push_back(T[1]);
+        for(int i = 2; i < n; ++i) {
             int sz = convex.size();
-            while(convex.size() >=2 && curve(convex[sz-2], convex[sz-1], T[i]) > 0) {
+            while(convex.size() >=2 && curve(convex[sz-2], convex[sz-1], T[i]) < 0) {
                 convex.pop_back();
                 --sz;
             }
