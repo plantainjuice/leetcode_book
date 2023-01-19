@@ -12,16 +12,16 @@
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
-      std::stack<int> s;
+      std::stack<long> s;
 
       for (const auto& token : tokens) {
         if (isdigit(token.back())) {
             s.push(stoi(token.c_str()));
         } else {
-          int op2 = s.top(); s.pop();
-          int op1 = s.top(); s.pop();
+          long op2 = s.top(); s.pop();
+          long op1 = s.top(); s.pop();
 
-          int res = 0;
+          long res = 0;
           if (token == "+") {
             res = op1 + op2;
           } else if (token == "-") {

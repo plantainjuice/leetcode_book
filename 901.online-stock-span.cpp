@@ -16,9 +16,7 @@ class StockSpanner {
       st_.pop();
     }
 
-    if (st_.empty() || price < st_.top().first) {
-      st_.push({price, span});
-    }
+    st_.push({price, span});
 
     return span;
   }
